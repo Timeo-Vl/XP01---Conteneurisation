@@ -80,3 +80,11 @@ button:disabled { opacity: .35; cursor: not-allowed; }
 #result.victoire { color: #2ecc71; }
 #result.défaite { color: #e74c3c; }
 #result.égalité { color: #f1c40f; }
+
+/* Score cumulé */
+.scoreboard { display: flex; gap: 14px; margin-bottom: 16px; }
+.scoreboard span {
+  padding: 6px 16px; border-radius: 20px; background: rgba(0,0,0,.35);
+  border: 1px solid #f1c40f; letter-spacing: 1px; text-transform: uppercase; font-size: 14px;
+}
+.scoreboard b { margin-left: 6px; color: #f1c40f; font-size: 18px; }

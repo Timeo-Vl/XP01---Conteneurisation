@@ -29,6 +29,15 @@ function handValue(hand) {
 }
 
 let game = null;
+const score = { victoires: 0, defaites: 0, egalites: 0 };
+
+function finish(result) {
+  game.status = 'finished';
+  game.result = result;
+  if (result === 'victoire') score.victoires++;
+  else if (result === 'défaite') score.defaites++;
+  else score.egalites++;
+}
 
 function newGame() {
   const deck = createDeck();
@@ -46,10 +55,9 @@ function stand() {
   while (handValue(game.dealer) < 17) game.dealer.push(game.deck.pop());
   const p = handValue(game.player);
   const d = handValue(game.dealer);
-  game.status = 'finished';
-  if (d > 21 || p > d) game.result = 'victoire';
-  else if (p === d) game.result = 'égalité';
-  else game.result = 'défaite';
+  if (d > 21 || p > d) finish('victoire');
+  else if (p === d) finish('égalité');
+  else finish('défaite');
 }
 
 function view() {
@@ -66,6 +74,7 @@ function view() {
 }
 
 app.get('/state', (req, res) => res.json(view()));
+app.get('/score', (req, res) => res.json(score));
 
 app.post('/new', (req, res) => {
   newGame();
@@ -77,10 +86,7 @@ app.post('/hit', (req, res) => {
     return res.status(400).json({ error: 'Aucune partie en cours' });
   }
   game.player.push(game.deck.pop());
-  if (handValue(game.player) > 21) {
-    game.status = 'finished';
-    game.result = 'défaite';
-  }
+  if (handValue(game.player) > 21) finish('défaite');
   res.json(view());
 });
 

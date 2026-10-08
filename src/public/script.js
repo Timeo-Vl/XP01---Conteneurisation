@@ -17,6 +17,13 @@ function setScore(id, value) {
   el.textContent = value;
 }
 
+async function loadScore() {
+  const s = await (await fetch('/score')).json();
+  $('sv').textContent = s.victoires;
+  $('sd').textContent = s.defaites;
+  $('se').textContent = s.egalites;
+}
+
 function render(s) {
   if (s.status === 'idle') return;
   $('dealer').innerHTML = s.dealer.map(cardHtml).join('');
@@ -31,6 +38,7 @@ function render(s) {
   const playing = s.status === 'playing';
   $('hit').disabled = !playing;
   $('stand').disabled = !playing;
+  if (s.status === 'finished') loadScore();
 }
 
 async function act(action) {
@@ -43,3 +51,5 @@ $('hit').addEventListener('click', () => act('hit'));
 $('stand').addEventListener('click', () => act('stand'));
 
 fetch('/state').then(r => r.json()).then(render);
+
+loadScore();
