@@ -1,0 +1,82 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0; min-height: 100vh; color: #f5f0e1;
+  font-family: Georgia, 'Times New Roman', serif;
+  background: radial-gradient(ellipse at center, #1b7a3d 0%, #0b3d1e 70%, #06210f 100%);
+  display: flex; flex-direction: column; align-items: center;
+}
+
+h1 {
+  letter-spacing: 6px; text-transform: uppercase; color: #f1c40f;
+  text-shadow: 0 3px 8px rgba(0,0,0,.6); margin: 30px 0 10px;
+}
+
+.table {
+  width: min(900px, 94vw); padding: 20px; border: 4px solid #8b5a2b;
+  border-radius: 120px / 60px; background: rgba(0,0,0,.18);
+  box-shadow: inset 0 0 40px rgba(0,0,0,.5), 0 10px 30px rgba(0,0,0,.6);
+}
+
+.zone { text-align: center; margin: 14px 0; }
+.label { font-size: 18px; opacity: .85; letter-spacing: 2px; text-transform: uppercase; }
+.score {
+  display: inline-block; margin-left: 8px; padding: 2px 12px; border-radius: 20px;
+  background: #f1c40f; color: #222; font-weight: bold;
+}
+.hand { display: flex; justify-content: center; gap: 10px; min-height: 145px; margin-top: 10px; }
+
+/* Cartes */
+/* Cartes */
+.card {
+  position: relative;
+  width: 90px; height: 128px; border-radius: 10px; background: #fff; color: #111;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,.5); animation: deal .35s ease-out;
+}
+.card.red { color: #c0392b; }
+.card .corner {
+  position: absolute; top: 8px; left: 8px;
+  font-size: 20px; line-height: 1; text-align: center;
+}
+.card .corner.bottom {
+  top: auto; left: auto; bottom: 8px; right: 8px;
+  transform: rotate(180deg);
+}
+.card .center {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 44px;
+}
+.card.back {
+  background: repeating-linear-gradient(45deg, #8e1b2b, #8e1b2b 6px, #b52b3d 6px, #b52b3d 12px);
+  border: 5px solid #fff;
+}
+
+@keyframes deal {
+  from { transform: translateY(-60px) rotate(-12deg); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+/* Boutons */
+.controls { text-align: center; margin: 20px 0 10px; }
+button {
+  font-family: inherit; font-size: 18px; font-weight: bold; margin: 6px; padding: 12px 26px;
+  border: none; border-radius: 30px; cursor: pointer; color: #fff;
+  box-shadow: 0 4px 0 rgba(0,0,0,.4); transition: transform .1s, filter .2s;
+}
+button:hover:not(:disabled) { filter: brightness(1.15); transform: translateY(-2px); }
+button:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,.4); }
+button:disabled { opacity: .35; cursor: not-allowed; }
+.new { background: #2980b9; }
+.hit { background: #27ae60; }
+.stand { background: #c0392b; }
+
+/* Résultat */
+#result {
+  text-align: center; font-size: 34px; font-weight: bold; min-height: 52px;
+  letter-spacing: 4px; text-shadow: 0 2px 6px rgba(0,0,0,.7);
+}
+#result.victoire { color: #2ecc71; }
+#result.défaite { color: #e74c3c; }
+#result.égalité { color: #f1c40f; }
