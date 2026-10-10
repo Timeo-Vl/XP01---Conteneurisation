@@ -1,0 +1,10 @@
+services:
+  blackjack:
+    build: .
+    image: blackjack:1.0
+    container_name: blackjack-prod
+    ports:
+      - "8080:3000"
+    environment:
+      - PORT=3000
+    restart: unless-stopped
