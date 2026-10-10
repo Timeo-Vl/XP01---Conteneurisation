@@ -21,6 +21,12 @@ describe('handValue', () => {
   test('un blackjack vaut 21', () => {
     expect(handValue([{ rank: 'A' }, { rank: 'K' }])).toBe(21);
   });
+
+  test('GET /version renvoie la version', async () => {
+    const res = await request(app).get('/version');
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('version');
+  });
 });
 
 describe('API', () => {
