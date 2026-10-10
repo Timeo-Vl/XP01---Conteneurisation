@@ -75,6 +75,7 @@ function view() {
 
 app.get('/state', (req, res) => res.json(view()));
 app.get('/score', (req, res) => res.json(score));
+app.get('/version', (req, res) => res.json({ version: require('../package.json').version }));
 
 app.post('/new', (req, res) => {
   newGame();

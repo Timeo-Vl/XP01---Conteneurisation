@@ -53,3 +53,5 @@ $('stand').addEventListener('click', () => act('stand'));
 fetch('/state').then(r => r.json()).then(render);
 
 loadScore();
+
+fetch('/version').then(r => r.json()).then(v => { $('version').textContent = 'v' + v.version; });

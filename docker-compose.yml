@@ -1,7 +1,7 @@
 services:
   blackjack:
     build: .
-    image: blackjack:1.0
+    image: blackjack:1.1
     container_name: blackjack-prod
     ports:
       - "8080:3000"
